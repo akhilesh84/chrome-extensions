@@ -11,7 +11,7 @@
     "scripting"
   ],
   "action": {
-    "default_title": "Click me",
+    "default_title": "Use this extension to scrape stock data from Yahoo Finance",
     "default_icon": {
       "16": "yahoo16.png",
       "32": "yahoo32.png"
