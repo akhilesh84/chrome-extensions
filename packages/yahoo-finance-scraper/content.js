@@ -1,4 +1,3 @@
-// Ensure the flag is in the global scope
 if (!window.isListenerAdded) {
     window.isListenerAdded = true;
 
@@ -8,7 +7,7 @@ if (!window.isListenerAdded) {
             if (table) {
                 const rows = Array.from(table.rows);
                 const tableContent = rows.map(row => {
-                    return Array.from(row.cells).map(cell => cell.innerText);
+                    return Array.from(row.cells).map(cell => cell.innerText).join(",");
                 });
                 console.log("Table content:", tableContent);
                 sendResponse({ content: tableContent });
