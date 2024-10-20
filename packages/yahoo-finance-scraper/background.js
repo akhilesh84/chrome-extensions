@@ -3,6 +3,20 @@ chrome.action.onClicked.addListener((tab) => {
         target: { tabId: tab.id },
         files: ['content.js']
     }, () => {
-        chrome.tabs.sendMessage(tab.id, { action: "scrape" });
+        let res = chrome.tabs.sendMessage(tab.id, { action: "scrape" });
+        res.then(data => {
+            console.log(data.meta.scrip);
+            console.table(data.content);
+            // Save the data to a CSV file using chrole.download API
+            const csv = data.content.map(row => Object.values(row).join(",")).join("\n");
+            const blob = new Blob([csv], { type: "text/csv" });
+            
+            // const url = URL.createObjectURL(blob);
+            chrome.downloads.download({
+                // url: url,
+                url: `data:text/csv;${csv}`,
+                filename: "stock-data.csv"
+            });
+        });
     });
 });

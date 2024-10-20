@@ -8,7 +8,9 @@
   },
   "permissions": [
     "activeTab",
-    "scripting"
+    "scripting",
+    "downloads",
+    "tabs"
   ],
   "action": {
     "default_title": "Use this extension to scrape stock data from Yahoo Finance",
