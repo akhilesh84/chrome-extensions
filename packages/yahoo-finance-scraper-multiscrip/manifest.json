@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Yahoo Finance Scraper",
+  "version": "0.0.1",
+  "description": "Scrape Yahoo Finance for stock data",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "downloads",
+    "tabs"
+  ],
+  "action": {
+    "default_title": "Use this extension to scrape stock data from Yahoo Finance",
+    "default_icon": {
+      "16": "yahoo16.png",
+      "32": "yahoo32.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "js": ["content.js"],
+      "matches": [
+        "https://finance.yahoo.com/quote/*/history"
+      ]
+    }
+  ]
+}
