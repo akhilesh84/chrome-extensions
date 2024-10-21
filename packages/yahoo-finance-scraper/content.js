@@ -1,12 +1,22 @@
 //TODO: Instead of using global variable, we can use chrome.storage API to store the state of the extension
 
+function extractScripCode(text) {
+    // Find the index of the first "."
+    const startIndex = text.indexOf("(") + 1;
+    
+    // Find the index of the first "."
+    const numOfChars = text.indexOf(".") - startIndex + 1;
+    
+    // Extract the substring from index 0 to the index of the first "."
+    return text.substring(startIndex, numOfChars);
+}
+
 if (!window.isListenerAdded) {
     window.isListenerAdded = true;
 
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         if (request.action === "scrape") {
-            // Read path component from active tab
-            // const path = window.location.pathname;
+            const scrip = extractScripCode(document.querySelector("h1.yf-xxbei9").childNodes[2].nodeValue);
             const table = document.getElementsByClassName("table yf-ewueuo noDl")[0];
             
             if (table) {
@@ -22,7 +32,7 @@ if (!window.isListenerAdded) {
                         c: parseFloat(row.cells[5].innerText.replace(/,/g, "")),
                     };
                 });
-                sendResponse({content: tableContent });
+                sendResponse({scrip: scrip, content: tableContent });
             } else {
                 sendResponse({ content: "Table not found" });
             }
