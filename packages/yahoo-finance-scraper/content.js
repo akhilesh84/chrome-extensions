@@ -17,7 +17,7 @@ if (!window.isListenerAdded) {
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         if (request.action === "scrape") {
             const scrip = extractScripCode(document.querySelector("h1.yf-xxbei9").childNodes[2].nodeValue);
-            const table = document.getElementsByClassName("table yf-ewueuo noDl")[0];
+            const table = document.getElementsByClassName("table noDl")[0];
             
             if (table) {
                 // Filter out rows having dividend data
